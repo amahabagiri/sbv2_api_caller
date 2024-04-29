@@ -14,7 +14,7 @@ headers = {
 }
 
 # テキストの配列
-text_array = ["あああああ", "あああああ", "あああああ"]
+text_array = ["こんにちは。私の名前はあかねです。今年で20歳です。", "泣いちゃいます", "好きな食べ物は魚です。"]
 
 # 各テキストに対してリクエストを送信
 for text in text_array:
@@ -31,10 +31,10 @@ for text in text_array:
         "language": "JP",
         "auto_split": "true",
         "split_interval": 0.5,
-        "assist_text": None,
+        #"assist_text": None,
         "assist_text_weight": 1,
         "style": "Neutral",
-        "style_weight": 5
+        "style_weight": 10
     }
 
     # パラメータをURLエンコードして、URLに追加
