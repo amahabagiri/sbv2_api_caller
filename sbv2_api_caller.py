@@ -4,6 +4,8 @@ import tempfile
 import os
 from playsound import playsound
 from urllib.parse import urlencode
+import yaml
+import time
 
 # APIのエンドポイントURL
 base_url = "http://127.0.0.1:5000/voice"
@@ -13,17 +15,27 @@ headers = {
     "accept": "audio/wav"
 }
 
-# テキストの配列
-text_array = ["こんにちは。私の名前はあかねです。今年で20歳です。", "泣いちゃいます", "好きな食べ物は魚です。"]
+# config.yamlからパラメータを読み込む
+with open("config.yaml", "r") as f:
+    config = yaml.safe_load(f)
+
+model_id = config["model_id"]
+speaker_id = config["speaker_id"]
+
+# speech_script.txtからテキストの配列を読み込む
+with open("speech_script.txt", "r", encoding="utf-8") as f:
+    text_array = f.read().split("\n")
+
+print(text_array)
 
 # 各テキストに対してリクエストを送信
 for text in text_array:
     # リクエストパラメータ
     params = {
-        "text": text,
+        "text": text.strip().replace("\n", ""),  # 前後の空白を削除し、改行を取り除く
         "encoding": "utf-8",
-        "model_id": 3,
-        "speaker_id": 0,
+        "model_id": model_id,
+        "speaker_id": speaker_id,
         "sdp_ratio": 0.2,
         "noise": 0.6,
         "noisew": 0.8,
@@ -61,6 +73,8 @@ for text in text_array:
 
             # 一時ファイルを削除
             os.unlink(temp_file_path)
+            
+            time.sleep(0.3)
 
             print(f"Played audio for text '{text}'")
     except Exception as e:

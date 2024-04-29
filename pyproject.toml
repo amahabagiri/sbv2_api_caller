@@ -13,6 +13,7 @@ generate-setup-file = false
 python = "^3.8"
 playsound = "1.2.2"
 pygobject = "^3.42.0"
+pyyaml = "^6.0.1"
 
 [build-system]
 requires = ["poetry-core"]
