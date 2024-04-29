@@ -1,2 +1,1 @@
-# sbv2_api_caller
-API caller for Style-Bert-VITS2
+# svb2_api_caller

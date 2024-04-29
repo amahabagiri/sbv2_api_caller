@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "sbv2-api-caller"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+license = "MIT2"
+readme = "README.md"
+
+[tool.poetry.build]
+generate-setup-file = false
+
+[tool.poetry.dependencies]
+python = "^3.8"
+playsound = "1.2.2"
+pygobject = "^3.42.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
