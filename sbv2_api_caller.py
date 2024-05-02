@@ -7,8 +7,6 @@ from urllib.parse import urlencode
 import yaml
 import time
 
-# APIのエンドポイントURL
-base_url = "http://127.0.0.1:5000/voice"
 
 # リクエストヘッダー
 headers = {
@@ -21,12 +19,11 @@ with open("config.yaml", "r") as f:
 
 model_id = config["model_id"]
 speaker_id = config["speaker_id"]
+base_url = config["url"]
 
 # speech_script.txtからテキストの配列を読み込む
 with open("speech_script.txt", "r", encoding="utf-8") as f:
     text_array = f.read().split("\n")
-
-print(text_array)
 
 # 各テキストに対してリクエストを送信
 for text in text_array:
@@ -50,7 +47,7 @@ for text in text_array:
     }
 
     # パラメータをURLエンコードして、URLに追加
-    url = base_url + "?" + urlencode(params)
+    url = base_url + "/voice" + "?" + urlencode(params)
 
     # GETリクエストを作成
     req = Request(url, headers=headers, method="GET")
@@ -73,8 +70,7 @@ for text in text_array:
 
             # 一時ファイルを削除
             os.unlink(temp_file_path)
-            
-            time.sleep(0.3)
+            time.sleep(0.2)
 
             print(f"Played audio for text '{text}'")
     except Exception as e:
